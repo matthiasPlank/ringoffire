@@ -1,5 +1,8 @@
 #field{
     background-image: url(../../assets/img/wood.jpg);
+    background-size: cover;
+
+    background-repeat: no-repeat;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -10,11 +13,36 @@
         position: relative;
 
         .card{
-            width: 300px;
+            width: 200px;
             height: auto;
             position: absolute;
         }
+        .fistcard{
+            &:hover{
+               transition: transform 0.2s ease-out;  
+               transform: scale(1.1);
+               cursor: pointer;
+            }
+        }
     }
+}
 
-  
+.pickCardAnimation{
+    animation: pick-Card-Animation 3s ease-in-out;
+    transform: scale(1) translateX(340px) translateY(-320px) rotate(10deg)
+}
+
+@keyframes pick-Card-Animation{
+    0%{
+        transform: scale(1.2);
+    }
+    30%{
+        transform: scale(1.7);
+    }
+    50%{
+        transform: scale(1.7);
+    }
+    100%{
+        transform: scale(1) translateX(340px) translateY(-320px) rotate(10deg); 
+    }
 }
