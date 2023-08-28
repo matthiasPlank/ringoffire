@@ -1,15 +1,23 @@
 export class Game{
     players:string[] = [];  
     stack:string[] = []; 
-    playedCars:string[] = []; 
+    playedCards:string[] = []; 
     currentPlayer:number = 0; 
 
     constructor(){ 
         for (let i = 1; i < 14; i++) {
-            this.stack.push("c0" + i );   
-            this.stack.push("d0" + i );    
-            this.stack.push("h0" + i );    
-            this.stack.push("s0" + i );        
+            if(i<10){
+                this.stack.push("c0" + i );   
+                this.stack.push("d0" + i );    
+                this.stack.push("h0" + i );    
+                this.stack.push("s0" + i );        
+            }
+            else{
+                this.stack.push("c" + i );   
+                this.stack.push("d" + i );    
+                this.stack.push("h" + i );    
+                this.stack.push("s" + i );      
+            }
         }
         this.stack = shuffle(this.stack); 
     }
