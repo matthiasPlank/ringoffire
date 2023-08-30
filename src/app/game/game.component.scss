@@ -51,3 +51,15 @@
     transform: scale(1) translateX(340px) translateY(-320px) rotate(10deg); 
     right: 50px;
 }
+
+.player-position{
+
+    position: absolute;
+    right: -50px;
+}
+
+#btn-add-player{
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+}
