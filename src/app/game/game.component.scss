@@ -1,8 +1,18 @@
-#field{
-    background-image: url(../../assets/img/wood.jpg);
-    background-size: cover;
+#gameFieldBackgroundImage{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
     overflow: hidden;
-    background-repeat: no-repeat;
+}
+
+
+#field{
+  
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -55,7 +65,7 @@
 .player-position{
 
     position: absolute;
-    right: -50px;
+    right: 0px;
 }
 
 #btn-add-player{
@@ -68,4 +78,84 @@
     bottom: 20px;
     left: 150px;
     right: 150px;
+}
+
+@media screen and (max-width: 1150px) {
+
+    #field{
+        .card-stack{
+            .card{
+                width: 100px;
+                height: auto;
+                position: absolute;
+            }
+        }
+    }
+    .pickCardAnimation{
+        animation: pick-Card-AnimationMobile 3s ease-in-out;
+        transform: scale(1) translateX(160px) translateY(-150px) rotate(10deg); 
+    }
+
+    @keyframes pick-Card-AnimationMobile{
+        0%{
+            transform: scale(1.2);
+        }
+        30%{
+            transform: scale(1.7);
+        }
+        50%{
+            transform: scale(1.7);
+        }
+        100%{
+            transform: scale(1) translateX(160px) translateY(-150px) rotate(10deg); 
+        }
+    }
+
+    .playedCards{
+        transform: scale(1) translateX(160px) translateY(-150px) rotate(10deg); 
+        right: 50px;
+    }    
+}
+
+@media screen and (max-width: 800px) {
+
+    .pickCardAnimation{
+        animation: pick-Card-AnimationMobileUnder800 3s ease-in-out;
+        transform: scale(1) translateX(60px) translateY(-180px) rotate(10deg);
+    }
+    
+    @keyframes pick-Card-AnimationMobileUnder800{
+        0%{
+            transform: scale(1.2);
+        }
+        30%{
+            transform: scale(1.7);
+        }
+        50%{
+            transform: scale(1.7);
+        }
+        100%{
+            transform: scale(1) translateX(60px) translateY(-180px) rotate(10deg); 
+        }
+    }
+    
+    .playedCards{
+        transform: scale(1) translateX(60px) translateY(-180px) rotate(10deg);
+        right: 50px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    #gameInfoCard{
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+    #btn-add-player{
+        position: absolute;
+        bottom: 150px;
+        right: 50px;
+        z-index: 2;
+    }
 }
