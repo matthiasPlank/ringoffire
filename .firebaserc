@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ringoffire-c2acf": {
+      "hosting": {
+        "ringoffire": [
+          "ringoffire-c2acf"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ringoffire-c2acf"
+  }
+}
