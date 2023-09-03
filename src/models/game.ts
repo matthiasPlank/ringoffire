@@ -22,6 +22,15 @@ export class Game{
         this.stack = shuffle(this.stack); 
     }
 
+    public toJSON(){
+        return {
+            players: this.players, 
+            stack: this.stack,
+            playedCards: this.playedCards,
+            currentPlayer: this.currentPlayer
+        }
+    }
+
 }
 
 export function shuffle<T>(array: T[]): T[] {
