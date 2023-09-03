@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Game } from 'src/models/game';
-import { Firestore, collectionData, docData  } from '@angular/fire/firestore';
-import { collection, doc, getDoc, setDoc , getFirestore, onSnapshot, addDoc} from 'firebase/firestore';
+import { Firestore } from '@angular/fire/firestore';
+import { collection , addDoc} from 'firebase/firestore';
 
 
 
@@ -14,6 +14,7 @@ import { collection, doc, getDoc, setDoc , getFirestore, onSnapshot, addDoc} fro
 export class StartScreenComponent {
 
   firestore: Firestore = inject(Firestore); 
+  
   constructor(private router: Router){
 
   }
@@ -25,17 +26,6 @@ export class StartScreenComponent {
     
     const docRef = await addDoc(collection(this.firestore, "games"), game.toJSON() );
     console.log("Document written with ID: ", docRef.id);
-
-/* 
-
-    await setDoc(doc(gameCollection), game.toJSON()).then((data) => {
-      console.log("Successful: " + data)})
-    .catch((error) => {
-      console.log(`Unsuccessful returned error ${error}`)
-    });
-
-    debugger; 
-     */
 
     this.router.navigateByUrl("game/"+ docRef.id); 
   }

@@ -42,7 +42,10 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     MatInputModule,
     FormsModule, 
     MatFormFieldModule, 
-    MatCardModule, provideFirebaseApp(() => initializeApp(environment.firebase)), provideAuth(() => getAuth()), provideFirestore(() => getFirestore())
+    MatCardModule, 
+    provideFirebaseApp(() => initializeApp(environment.firebase)), 
+    provideAuth(() => getAuth()), 
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]

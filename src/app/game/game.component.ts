@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Game } from 'src/models/game';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
+import {MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { Firestore, collectionData, docData  } from '@angular/fire/firestore';
-import { collection, doc, getDoc, setDoc , getFirestore, onSnapshot} from 'firebase/firestore';
+import { Firestore } from '@angular/fire/firestore';
+import { doc, getFirestore, onSnapshot, updateDoc} from 'firebase/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -16,13 +16,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-  pickCardAnimation = false; 
-  game: Game = new Game(); 
-  currentCard: string = "c01"; 
 
+  
+  game: Game = new Game(); 
   firestore: Firestore = inject(Firestore); 
   games$!: Observable<any[]>;
-
   gameID:string = ""; 
   data: any;
 
@@ -47,27 +45,27 @@ export class GameComponent implements OnInit {
       this.game.playedCards = doc.data().playedCards; 
       this.game.players = doc.data().players; 
       this.game.stack = doc.data().stack; 
+      this.game.pickCardAnimation = doc.data().pickCardAnimation;
+      this.game.currentCard = doc.data().currentCard;
    });
 
-
-
-
-     
   }
   
   pickCard(){
-    if(!this.pickCardAnimation){
+    if(!this.game.pickCardAnimation){
 
       console.log("pick card"); 
-      this.currentCard = this.game.stack.pop() ?? ''; 
-      this.pickCardAnimation = true; 
+      this.game.currentCard = this.game.stack.pop() ?? ''; 
+      this.game.pickCardAnimation = true; 
+      this.saveGameInFirestore(); 
      
       setTimeout(() => {
-        this.pickCardAnimation = false; 
-        this.game.playedCards.push(this.currentCard);
+        this.game.pickCardAnimation = false; 
+        this.game.playedCards.push(this.game.currentCard);
         this.game.currentPlayer++; 
         this.game.currentPlayer = this.game.currentPlayer % this.game.players.length; 
         console.log(this.game.currentPlayer); 
+        this.saveGameInFirestore(); 
       }, 3000);
     }
   }
@@ -78,8 +76,14 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result && result.length > 0){
         this.game.players.push(result); 
+        this.saveGameInFirestore(); 
       }
     });
+  }
+
+  async saveGameInFirestore(){
+    const gameDocRef = doc(this.firestore, "games", this.gameID);
+    await updateDoc(gameDocRef, this.game.toJSON() );
   }
 
 }
