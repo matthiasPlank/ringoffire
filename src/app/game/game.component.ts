@@ -2,9 +2,13 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Game } from 'src/models/game';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { Firestore, collectionData  } from '@angular/fire/firestore';
-import { collection, doc, setDoc } from 'firebase/firestore';
+import { Firestore, collectionData, docData  } from '@angular/fire/firestore';
+import { collection, doc, getDoc, setDoc , getFirestore, onSnapshot} from 'firebase/firestore';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
+
+
 
 @Component({
   selector: 'app-game',
@@ -19,24 +23,38 @@ export class GameComponent implements OnInit {
   firestore: Firestore = inject(Firestore); 
   games$!: Observable<any[]>;
 
-  constructor(public dialog: MatDialog){
+  gameID:string = ""; 
+  data: any;
+
+  constructor(private route: ActivatedRoute , public dialog: MatDialog){
+    
  
   }
 
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.game = new Game(); 
-    //console.log(this.game); 
-    const gameCollection = collection(this.firestore, 'games'); 
-    const gameJSON = JSON.stringify(this.game) ; 
-    setDoc(doc(gameCollection), this.game.toJSON() );  
 
-    this.games$ = collectionData(gameCollection)
-    this.games$.subscribe((games) => {
-      console.log(games); 
+    this.route.params.subscribe((param) => {
+      this.gameID = this.route.snapshot.params['id'];
+      console.log(param);
     }); 
-  }
 
+    const db = getFirestore();
+    const unsub = onSnapshot(doc(db, "games", this.gameID), (doc:any) => {
+      console.log("Current data: ", doc.data());
+      this.game.currentPlayer = doc.data().currentPlayer; 
+      this.game.playedCards = doc.data().playedCards; 
+      this.game.players = doc.data().players; 
+      this.game.stack = doc.data().stack; 
+   });
+
+
+
+
+     
+  }
+  
   pickCard(){
     if(!this.pickCardAnimation){
 
