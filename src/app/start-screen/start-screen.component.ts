@@ -21,9 +21,7 @@ export class StartScreenComponent {
 
   async startGame(){
 
-    let game = new Game(); 
-    const gameCollection = collection(this.firestore, 'games');
-    
+    let game = new Game();     
     const docRef = await addDoc(collection(this.firestore, "games"), game.toJSON() );
     console.log("Document written with ID: ", docRef.id);
 
