@@ -26,7 +26,6 @@ export class GameComponent implements OnInit {
 
   constructor(private route: ActivatedRoute , public dialog: MatDialog){
     
- 
   }
 
 
@@ -38,8 +37,8 @@ export class GameComponent implements OnInit {
       console.log(param);
     }); 
 
-    const db = getFirestore();
-    const unsub = onSnapshot(doc(db, "games", this.gameID), (doc:any) => {
+    if(this.firestore){
+      const unsub = onSnapshot(doc(this.firestore, "games", this.gameID), (doc:any) => {
       console.log("Current data: ", doc.data());
       this.game.currentPlayer = doc.data().currentPlayer; 
       this.game.playedCards = doc.data().playedCards; 
@@ -47,7 +46,8 @@ export class GameComponent implements OnInit {
       this.game.stack = doc.data().stack; 
       this.game.pickCardAnimation = doc.data().pickCardAnimation;
       this.game.currentCard = doc.data().currentCard;
-   });
+    });
+  }
 
   }
   

@@ -21,11 +21,23 @@ export class StartScreenComponent {
 
   async startGame(){
 
-    let game = new Game();     
-    const docRef = await addDoc(collection(this.firestore, "games"), game.toJSON() );
-    console.log("Document written with ID: ", docRef.id);
+    let game = new Game();   
 
-    this.router.navigateByUrl("game/"+ docRef.id); 
+    if(this.firestore){
+      console.log("Firestore exists");
+      try{
+        const docRef = await addDoc(collection(this.firestore, "games"), game.toJSON() );
+        console.log("Document written with ID: ", docRef.id);
+        this.router.navigateByUrl("game/"+ docRef.id); 
+      }
+      catch{
+        console.log("ERROR by get docRef!");
+      }
+    }  
+    else{
+      console.log("Firestore nicht gefunden!");
+    }
+
   }
 
 }
