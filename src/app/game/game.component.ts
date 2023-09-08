@@ -2,8 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Game } from 'src/models/game';
 import {MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { Firestore } from '@angular/fire/firestore';
-import { doc, getFirestore, onSnapshot, updateDoc} from 'firebase/firestore';
+import { Firestore, doc, updateDoc, onSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 

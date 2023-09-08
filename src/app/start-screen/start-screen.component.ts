@@ -1,10 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Game } from 'src/models/game';
-import { Firestore } from '@angular/fire/firestore';
-import { collection , addDoc} from 'firebase/firestore';
-
-
+import { Firestore , collection, addDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-start-screen',
@@ -14,6 +11,7 @@ import { collection , addDoc} from 'firebase/firestore';
 export class StartScreenComponent {
 
   firestore: Firestore = inject(Firestore); 
+ 
   
   constructor(private router: Router){
 
