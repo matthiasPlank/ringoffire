@@ -34,7 +34,6 @@ export class GameInfoComponent implements OnChanges {
     if(this.firstCardPlayed){
       let cardNumber : number = 0; 
       this.card.substring(1,2) == "0" ? cardNumber = +this.card.substring(2,3) : cardNumber = +this.card.substring(1,3) ; 
-      console.log("Cardnumber: " + cardNumber);  
       this.title = this.cardAction[cardNumber-1].title; 
       this.description = this.cardAction[cardNumber-1].description; 
     }
