@@ -14,6 +14,9 @@ export class DialogAddPlayerComponent {
 
   }
 
+  /**
+   * Close AddNewPlayer Dialog without any Action / Cancle Add new player. 
+   */
   onNoClick(): void {
     this.dialogRef.close();
   }

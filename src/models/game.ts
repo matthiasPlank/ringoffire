@@ -6,6 +6,9 @@ export class Game{
     pickCardAnimation = false; 
     currentCard: string = "c01"; 
 
+    /**
+     * Constructor of the game component. Sets the card stack in random order. 
+     */
     constructor(){ 
         for (let i = 1; i < 14; i++) {
             if(i<10){
@@ -24,6 +27,10 @@ export class Game{
         this.stack = shuffle(this.stack); 
     }
 
+    /**
+     * Converts the game in a JSON structor.
+     * @returns JSON String
+     */
     public toJSON(){
         return {
             players: this.players, 
@@ -34,9 +41,13 @@ export class Game{
             currentCard: this.currentCard
         }
     }
-
 }
 
+/**
+ * Shuffles the elemtents of an array and returns this in an random order. 
+ * @param array - Array of cards 
+ * @returns array in random order. 
+ */
 export function shuffle<T>(array: T[]): T[] {
     let currentIndex = array.length,  randomIndex;
 
@@ -51,6 +62,5 @@ export function shuffle<T>(array: T[]): T[] {
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex], array[currentIndex]];
     }
-  
     return array;
 };

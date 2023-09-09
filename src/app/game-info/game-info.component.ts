@@ -27,6 +27,9 @@ export class GameInfoComponent implements OnChanges {
   @Input() card = ""; 
   @Input() firstCardPlayed = false;    
 
+  /**
+   * Sets the rule in the infobox onChange of the component, 
+   */
   ngOnChanges():void{
     if(this.firstCardPlayed){
       let cardNumber : number = 0; 

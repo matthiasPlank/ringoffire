@@ -12,30 +12,28 @@ export class StartScreenComponent {
 
   firestore: Firestore = inject(Firestore); 
  
-  
   constructor(private router: Router){
 
   }
 
+  /**
+   * Creates a new Game and save it in the firebase. Sets Router to the new GameID. 
+   */
   async startGame(){
 
     let game = new Game();   
 
     if(this.firestore){
-      console.log("Firestore exists");
       try{
         const docRef = await addDoc(collection(this.firestore, "games"), game.toJSON() );
-        console.log("Document written with ID: ", docRef.id);
         this.router.navigateByUrl("game/"+ docRef.id); 
       }
       catch{
-        console.log("ERROR by get docRef!");
+        console.warn("Could not get docmentReference from firestore!");
       }
     }  
     else{
-      console.log("Firestore nicht gefunden!");
+      console.warn("Could not connect to firestore!");
     }
-
   }
-
 }

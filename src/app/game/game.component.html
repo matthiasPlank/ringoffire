@@ -1,6 +1,6 @@
 <app-player *ngFor="let player of game.players; let i = index" 
-[ngStyle]="{'top.px': i*80 +50}" [name]="game.players[i]" 
-[currentPlayer]="i == this.game.currentPlayer" class="player-position">
+    [ngStyle]="{'top.px': i*80 +50}" [name]="game.players[i]" 
+    [currentPlayer]="i == this.game.currentPlayer" class="player-position">
 </app-player>
 
 <img id="gameFieldBackgroundImage" src="assets/img/wood.jpg" alt="">

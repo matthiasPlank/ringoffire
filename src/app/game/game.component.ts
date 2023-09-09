@@ -6,9 +6,6 @@ import { Firestore, doc, updateDoc, onSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
-
-
-
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -23,37 +20,42 @@ export class GameComponent implements OnInit {
   gameID:string = ""; 
   data: any;
 
+  /**
+   * Constructor of the GameComponent. 
+   * @param route - Router
+   * @param dialog - MaterialDesigne Dialog
+   */
   constructor(private route: ActivatedRoute , public dialog: MatDialog){
     
   }
 
-
+  /**
+   * Game initializing. Get Game ID from Router and load Game from firestore. 
+   */
   async ngOnInit(): Promise<void> {
     this.game = new Game(); 
 
     this.route.params.subscribe((param) => {
       this.gameID = this.route.snapshot.params['id'];
-      console.log(param);
     }); 
 
     if(this.firestore){
       const unsub = onSnapshot(doc(this.firestore, "games", this.gameID), (doc:any) => {
-      console.log("Current data: ", doc.data());
       this.game.currentPlayer = doc.data().currentPlayer; 
       this.game.playedCards = doc.data().playedCards; 
       this.game.players = doc.data().players; 
       this.game.stack = doc.data().stack; 
       this.game.pickCardAnimation = doc.data().pickCardAnimation;
       this.game.currentCard = doc.data().currentCard;
-    });
-  }
-
+      });
+    }
   }
   
+  /**
+   * Pick card from Stack
+   */
   pickCard(){
     if(!this.game.pickCardAnimation){
-
-      console.log("pick card"); 
       this.game.currentCard = this.game.stack.pop() ?? ''; 
       this.game.pickCardAnimation = true; 
       this.saveGameInFirestore(); 
@@ -61,14 +63,17 @@ export class GameComponent implements OnInit {
       setTimeout(() => {
         this.game.pickCardAnimation = false; 
         this.game.playedCards.push(this.game.currentCard);
+        isNaN(this.game.currentPlayer) ? this.game.currentPlayer = 0 : "" ; 
         this.game.currentPlayer++; 
-        this.game.currentPlayer = this.game.currentPlayer % this.game.players.length; 
-        console.log(this.game.currentPlayer); 
+        this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;         
         this.saveGameInFirestore(); 
       }, 3000);
     }
   }
 
+  /**
+   * Open "AddNewPlayer" Dialog
+   */
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
@@ -80,9 +85,11 @@ export class GameComponent implements OnInit {
     });
   }
 
+  /**
+   * Save current Game in firestore. 
+   */
   async saveGameInFirestore(){
     const gameDocRef = doc(this.firestore, "games", this.gameID);
     await updateDoc(gameDocRef, this.game.toJSON() );
   }
-
 }

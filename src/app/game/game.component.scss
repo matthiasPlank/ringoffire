@@ -12,16 +12,13 @@
 
 
 #field{
-  
     height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-
     .card-stack{
         position: relative;
-
         .card{
             width: 200px;
             height: auto;
@@ -81,7 +78,6 @@
 }
 
 @media screen and (max-width: 1150px) {
-
     #field{
         .card-stack{
             .card{
@@ -110,7 +106,6 @@
             transform: scale(1) translateX(160px) translateY(-150px) rotate(10deg); 
         }
     }
-
     .playedCards{
         transform: scale(1) translateX(160px) translateY(-150px) rotate(10deg); 
         right: 50px;
@@ -123,7 +118,6 @@
         animation: pick-Card-AnimationMobileUnder800 3s ease-in-out;
         transform: scale(1) translateX(60px) translateY(-180px) rotate(10deg);
     }
-    
     @keyframes pick-Card-AnimationMobileUnder800{
         0%{
             transform: scale(1.2);
@@ -138,7 +132,6 @@
             transform: scale(1) translateX(60px) translateY(-180px) rotate(10deg); 
         }
     }
-    
     .playedCards{
         transform: scale(1) translateX(60px) translateY(-180px) rotate(10deg);
         right: 50px;
