@@ -67,7 +67,7 @@ export class GameComponent implements OnInit {
         this.game.currentPlayer++; 
         this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;         
         this.saveGameInFirestore(); 
-      }, 3000);
+      }, 1000);
     }
     else if(this.game.stack.length == 0){
       this.game.stack =this.game.playedCards; 

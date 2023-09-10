@@ -35,7 +35,7 @@
 }
 
 .pickCardAnimation{
-    animation: pick-Card-Animation 3s ease-in-out;
+    animation: pick-Card-Animation 1s ease-in-out;
     transform: scale(1) translateX(340px) translateY(-320px) rotate(10deg)
 }
 
@@ -88,7 +88,7 @@
         }
     }
     .pickCardAnimation{
-        animation: pick-Card-AnimationMobile 3s ease-in-out;
+        animation: pick-Card-AnimationMobile 1s ease-in-out;
         transform: scale(1) translateX(160px) translateY(-150px) rotate(10deg); 
     }
 
@@ -115,7 +115,7 @@
 @media screen and (max-width: 800px) {
 
     .pickCardAnimation{
-        animation: pick-Card-AnimationMobileUnder800 3s ease-in-out;
+        animation: pick-Card-AnimationMobileUnder800 1s ease-in-out;
         transform: scale(1) translateX(60px) translateY(-180px) rotate(10deg);
     }
     @keyframes pick-Card-AnimationMobileUnder800{
