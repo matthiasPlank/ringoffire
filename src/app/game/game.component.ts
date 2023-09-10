@@ -55,7 +55,7 @@ export class GameComponent implements OnInit {
    * Pick card from Stack
    */
   pickCard(){
-    if(!this.game.pickCardAnimation){
+    if(!this.game.pickCardAnimation && this.game.stack.length > 0){
       this.game.currentCard = this.game.stack.pop() ?? ''; 
       this.game.pickCardAnimation = true; 
       this.saveGameInFirestore(); 
@@ -69,6 +69,10 @@ export class GameComponent implements OnInit {
         this.saveGameInFirestore(); 
       }, 3000);
     }
+    else if(this.game.stack.length == 0){
+      this.game.stack =this.game.playedCards; 
+      this.pickCard(); 
+    } 
   }
 
   /**

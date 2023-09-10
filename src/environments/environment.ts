@@ -5,6 +5,6 @@ export const environment = {
     storageBucket: 'ringoffire-c2acf.appspot.com',
     apiKey: 'AIzaSyDkcEtUXvSDmJxWpiPq66S2k6Clb3oAdrs',
     authDomain: 'ringoffire-c2acf.firebaseapp.com',
-    messagingSenderId: '99236090824',
+    messagingSenderId: '99236090824'
   },
 };
