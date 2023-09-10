@@ -26,6 +26,7 @@ export class GameInfoComponent implements OnChanges {
   description: string = ""; 
   @Input() card = ""; 
   @Input() firstCardPlayed = false;    
+  @Input() playerAdded = false; 
 
   /**
    * Sets the rule in the infobox onChange of the component, 
@@ -36,6 +37,10 @@ export class GameInfoComponent implements OnChanges {
       this.card.substring(1,2) == "0" ? cardNumber = +this.card.substring(2,3) : cardNumber = +this.card.substring(1,3) ; 
       this.title = this.cardAction[cardNumber-1].title; 
       this.description = this.cardAction[cardNumber-1].description; 
+    }
+    else if(!this.playerAdded){
+      this.title = "No Players";
+      this.description = "Please add a player and try to pick a card again!";
     }
     else{
       this.title = "Pick a Card";

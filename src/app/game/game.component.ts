@@ -55,7 +55,7 @@ export class GameComponent implements OnInit {
    * Pick card from Stack
    */
   pickCard(){
-    if(!this.game.pickCardAnimation && this.game.stack.length > 0){
+    if(!this.game.pickCardAnimation && this.game.stack.length > 0 && this.game.players.length > 0){
       this.game.currentCard = this.game.stack.pop() ?? ''; 
       this.game.pickCardAnimation = true; 
       this.saveGameInFirestore(); 
